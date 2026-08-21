@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiadsa Screen Sharing - Compartición de pantalla simple y segura</title>
+
+    <meta
+      property="og:title"
+      content="Quiadsa Screen Sharing - Compartición de pantalla simple y segura"
+    />
+    <meta
+      property="og:description"
+      content="Comparte tu pantalla de forma segura y sencilla con Quiadsa Screen Sharing. Sin plugins, funciona directamente en tu navegador."
+    />
+    <meta
+      property="og:image"
+      content="./thumbnail.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&family=Saira+Condensed:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <h1>QUIADSA SCREEN SHARING</h1>
+      <p class="subtitle">Compartición de pantalla simple y segura</p>
+
+      <div class="tab-nav">
+        <button
+          class="tab-button active"
+          id="watchTabButton"
+          data-target="watchTabContent"
+        >
+          Ver transmisión
+        </button>
+        <button
+          class="tab-button"
+          id="streamTabButton"
+          data-target="streamTabContent"
+        >
+          Iniciar transmisión
+        </button>
+      </div>
+
+      <div class="tab-content-area">
+        <div id="watchTabContent" class="tab-content active">
+          <div class="tab-description">
+            Introduce el código de 5 caracteres proporcionado por el
+            emisor y pulsa "Conectar" para empezar a ver la pantalla.
+          </div>
+          <div id="viewerInfoContent">
+            <label for="codeInput">Código del emisor:</label>
+            <input
+              type="text"
+              id="codeInput"
+              maxlength="5"
+              placeholder="Introduce el código de 5 caracteres"
+            />
+            <button id="connectViewer" class="primary-button">Conectar</button>
+            <div id="remoteVideoContainer" class="plyr-inactive">
+              <video id="remoteVideo" playsinline></video>
+            </div>
+          </div>
+        </div>
+
+        <div id="streamTabContent" class="tab-content">
+          <div class="tab-description">
+            Pulsa "Iniciar transmisión". Concede el permiso para compartir
+            pantalla. Comparte el código generado con tus espectadores.
+          </div>
+          <div id="streamerInfoContent">
+            <button id="initiateStreamButton" class="primary-button">
+              Iniciar transmisión
+            </button>
+            <p id="streamerCodeDisplay">
+              Tu código: <strong id="streamerCode">Esperando...</strong>
+            </p>
+            <p id="viewerCountDisplay">
+              Espectadores conectados: <strong id="viewerCount">0</strong>
+            </p>
+            <video id="localVideo" muted playsinline></video>
+          </div>
+        </div>
+      </div>
+
+      <div id="statusArea">
+        <div id="status">Estado: Inactivo</div>
+        <div id="error"></div>
+      </div>
+
+      <div class="app-description">
+        <h2>Sobre Quiadsa Screen Sharing</h2>
+        <p>
+          Quiadsa Screen Sharing es una aplicación sencilla de compartición
+          de pantalla que utiliza tecnología web moderna. Comparte tu
+          pantalla directamente con otras personas en tiempo real, sin salir
+          del navegador.
+        </p>
+        <div class="features">
+          <div class="feature-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12.99H5V6.3l7-3.11v9.8z"
+              />
+            </svg>
+            <h4>Conexión segura</h4>
+            <p>
+              Las conexiones directas de igual a igual (WebRTC) están
+              cifradas de extremo a extremo.
+            </p>
+          </div>
+          <div class="feature-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M7 2v11h3v9l7-12h-4l4-8H7z" />
+            </svg>
+            <h4>Baja latencia</h4>
+            <p>
+              Transmisión en tiempo real optimizada para minimizar el
+              retraso entre los participantes.
+            </p>
+          </div>
+          <div class="feature-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"
+              />
+            </svg>
+            <h4>Configuración sencilla</h4>
+            <p>
+              Funciona directamente en tu navegador, sin plugins ni
+              instalaciones necesarias.
+            </p>
+          </div>
+        </div>
+        <h2>Cómo funciona</h2>
+        <p>
+          Esta aplicación utiliza <strong>WebRTC</strong> para establecer
+          conexiones de igual a igual directamente entre navegadores. La
+          configuración inicial de la conexión (señalización) usa
+          <strong>WebSockets</strong> para intercambiar la información
+          necesaria. Una vez establecida la conexión WebRTC, el WebSocket
+          normalmente ya no es necesario para los espectadores.
+        </p>
+        <h3>Compatibilidad con navegadores</h3>
+        <p>
+          La compartición de pantalla mediante WebRTC funciona en
+          navegadores modernos como: Google Chrome, Mozilla Firefox, Microsoft Edge (basado en Chromium) y Apple Safari.
+        </p>
+        <p>
+          Sin embargo, la captura de <strong>audio</strong> junto con el
+          vídeo de pantalla puede variar según el navegador y el sistema
+          operativo:
+        </p>
+        <ul>
+          <li>
+            <strong>Chrome / Edge:</strong> El mejor soporte en general,
+            especialmente en Windows. En macOS o Linux, la captura de audio
+            junto con la pantalla puede tener limitaciones.
+          </li>
+          <li>
+            <strong>Firefox:</strong> También ofrece buen soporte para la
+            captura de pantalla y audio.
+          </li>
+          <li>
+            <strong>Safari:</strong> Admite la compartición de pantalla; la
+            captura de audio simultánea puede ser menos consistente.
+          </li>
+        </ul>
+        <div class="highlight-box">
+          <p>
+            <strong>Recomendación:</strong> Para tener la mejor experiencia
+            compartiendo tu pantalla <strong>con audio</strong>, utiliza la
+            última versión de <strong>Google Chrome</strong> o
+            <strong>Microsoft Edge</strong>. Concede siempre los permisos
+            necesarios cuando se soliciten. La calidad depende de las
+            capacidades del navegador y de las condiciones de red.
+          </p>
+        </div>
+        <p>
+          <strong>Nota:</strong> El rendimiento depende de las condiciones
+          de red. Más información en
+          <a
+            href="https://webrtc.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >WebRTC.org</a
+          >.
+        </p>
+      </div>
+
+      <div class="footer">
+        &copy; 2026 Quiadsa Screen Sharing - Compartición de pantalla
+        minimalista con tecnología WebRTC.
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>
