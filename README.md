@@ -35,7 +35,7 @@ Compartición de pantalla simple y segura con WebRTC.
 ### Compilar y ejecutar
 
 ```sh
-git clone <url-del-repositorio>
+git clone <https://github.com/DGoncalvesR/QUIADSA-ScreenSharing>
 cd screenz
 go build -o quiadsa-screen-sharing
 ./quiadsa-screen-sharing -port=8080
